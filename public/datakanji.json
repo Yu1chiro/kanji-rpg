@@ -1,0 +1,1002 @@
+[
+  {
+    "id": 1,
+    "realm": 1,
+    "kanji": "日",
+    "onyomi": "NICHI, JITSU",
+    "kunyomi": "hi, -ka",
+    "meaning": "Matahari, Hari",
+    "example": "日本 (Jepang), 毎日 (Setiap hari), 日曜日 (Minggu)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 2,
+    "realm": 1,
+    "kanji": "月",
+    "onyomi": "GETSU, GATSU",
+    "kunyomi": "tsuki",
+    "meaning": "Bulan",
+    "example": "月曜日 (Senin), 今月 (Bulan ini), 来月 (Bulan depan)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 3,
+    "realm": 1,
+    "kanji": "木",
+    "onyomi": "MOKU, BOKU",
+    "kunyomi": "ki",
+    "meaning": "Pohon, Kayu",
+    "example": "木曜日 (Kamis), 木材 (Kayu bahan), 大木 (Pohon besar)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 4,
+    "realm": 1,
+    "kanji": "火",
+    "onyomi": "KA",
+    "kunyomi": "hi",
+    "meaning": "Api",
+    "example": "火曜日 (Selasa), 火事 (Kebakaran), 花火 (Kembang api)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 5,
+    "realm": 1,
+    "kanji": "水",
+    "onyomi": "SUI",
+    "kunyomi": "mizu",
+    "meaning": "Air",
+    "example": "水曜日 (Rabu), 水道 (Saluran air), 水泳 (Renang)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 6,
+    "realm": 1,
+    "kanji": "金",
+    "onyomi": "KIN, KON",
+    "kunyomi": "kane",
+    "meaning": "Emas, Uang",
+    "example": "金曜日 (Jumat), お金 (Uang), 金持ち (Orang kaya)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 7,
+    "realm": 1,
+    "kanji": "土",
+    "onyomi": "DO, TO",
+    "kunyomi": "tsuchi",
+    "meaning": "Tanah",
+    "example": "土曜日 (Sabtu), 土地 (Tanah/Lahan), お土産 (Oleh-oleh)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 8,
+    "realm": 1,
+    "kanji": "年",
+    "onyomi": "NEN",
+    "kunyomi": "toshi",
+    "meaning": "Tahun",
+    "example": "去年 (Tahun lalu), 来年 (Tahun depan), 半年 (Setengah tahun)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 9,
+    "realm": 1,
+    "kanji": "時",
+    "onyomi": "JI",
+    "kunyomi": "toki",
+    "meaning": "Waktu, Jam",
+    "example": "時間 (Waktu/Durasi), 時計 (Jam dinding), 一時 (Jam 1)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 10,
+    "realm": 1,
+    "kanji": "分",
+    "onyomi": "BUN, FUN",
+    "kunyomi": "wa-keru",
+    "meaning": "Menit, Bagian",
+    "example": "半分 (Setengah), 五分 (5 Menit), 分かる (Mengerti)",
+    "topic": "Hari & Tanggal"
+  },
+  {
+    "id": 11,
+    "realm": 2,
+    "kanji": "春",
+    "onyomi": "SHUN",
+    "kunyomi": "haru",
+    "meaning": "Musim Semi",
+    "example": "春休み (Libur musim semi), 春分 (Ekuinoks musim semi)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 12,
+    "realm": 2,
+    "kanji": "夏",
+    "onyomi": "KA, GE",
+    "kunyomi": "natsu",
+    "meaning": "Musim Panas",
+    "example": "夏休み (Libur musim panas), 真夏 (Tengah musim panas)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 13,
+    "realm": 2,
+    "kanji": "秋",
+    "onyomi": "SHUU",
+    "kunyomi": "aki",
+    "meaning": "Musim Gugur",
+    "example": "秋分 (Ekuinoks musim gugur), 秋祭り (Festival musim gugur)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 14,
+    "realm": 2,
+    "kanji": "冬",
+    "onyomi": "TOU",
+    "kunyomi": "fuyu",
+    "meaning": "Musim Dingin",
+    "example": "冬休み (Libur musim dingin), 真冬 (Tengah musim dingin)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 15,
+    "realm": 2,
+    "kanji": "今",
+    "onyomi": "KON, KIN",
+    "kunyomi": "ima",
+    "meaning": "Sekarang",
+    "example": "今日 (Hari ini), 今月 (Bulan ini), 今年 (Tahun ini)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 16,
+    "realm": 2,
+    "kanji": "先",
+    "onyomi": "SEN",
+    "kunyomi": "saki",
+    "meaning": "Sebelumnya, Depan",
+    "example": "先生 (Guru), 先月 (Bulan lalu), 先週 (Minggu lalu)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 17,
+    "realm": 2,
+    "kanji": "来",
+    "onyomi": "RAI",
+    "kunyomi": "ku-ru",
+    "meaning": "Datang, Berikut",
+    "example": "来月 (Bulan depan), 来年 (Tahun depan), 来週 (Minggu depan)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 18,
+    "realm": 2,
+    "kanji": "毎",
+    "onyomi": "MAI",
+    "kunyomi": "-",
+    "meaning": "Setiap",
+    "example": "毎日 (Setiap hari), 毎朝 (Setiap pagi), 毎週 (Setiap minggu)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 19,
+    "realm": 2,
+    "kanji": "朝",
+    "onyomi": "CHOU",
+    "kunyomi": "asa",
+    "meaning": "Pagi",
+    "example": "朝ご飯 (Sarapan), 毎朝 (Setiap pagi), 今朝 (Pagi ini)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 20,
+    "realm": 2,
+    "kanji": "昼",
+    "onyomi": "CHU",
+    "kunyomi": "hiru",
+    "meaning": "Siang",
+    "example": "昼休み (Istirahat siang), 昼ご飯 (Makan siang)",
+    "topic": "Bulan & Musim"
+  },
+  {
+    "id": 21,
+    "realm": 3,
+    "kanji": "人",
+    "onyomi": "JIN, NIN",
+    "kunyomi": "hito",
+    "meaning": "Orang",
+    "example": "日本人 (Orang Jepang), 三人 (3 Orang), 大人 (Dewasa)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 22,
+    "realm": 3,
+    "kanji": "父",
+    "onyomi": "FU",
+    "kunyomi": "chichi",
+    "meaning": "Ayah",
+    "example": "お父さん (Ayah orang lain), 祖父 (Kakek), 父の日 (Hari Ayah)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 23,
+    "realm": 3,
+    "kanji": "母",
+    "onyomi": "BO",
+    "kunyomi": "haha",
+    "meaning": "Ibu",
+    "example": "お母さん (Ibu orang lain), 祖母 (Nenek), 母国語 (Bahasa ibu)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 24,
+    "realm": 3,
+    "kanji": "子",
+    "onyomi": "SHI",
+    "kunyomi": "ko",
+    "meaning": "Anak",
+    "example": "子供 (Anak-anak), 女子 (Anak cewek), 男子 (Anak cowok)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 25,
+    "realm": 3,
+    "kanji": "男",
+    "onyomi": "DAN, NAN",
+    "kunyomi": "otoko",
+    "meaning": "Laki-laki",
+    "example": "男の子 (Anak laki-laki), 男性 (Pria), 長男 (Putra sulung)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 26,
+    "realm": 3,
+    "kanji": "女",
+    "onyomi": "JO",
+    "kunyomi": "onna",
+    "meaning": "Perempuan",
+    "example": "女の子 (Anak perempuan), 女性 (Wanita), 彼女 (Dia pr/Pacar)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 27,
+    "realm": 3,
+    "kanji": "兄",
+    "onyomi": "KEI, KYOU",
+    "kunyomi": "ani",
+    "meaning": "Kakak Laki-laki",
+    "example": "お兄さん (Kakak orang lain), 兄弟 (Saudara), 義兄 (Kakak ipar)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 28,
+    "realm": 3,
+    "kanji": "姉",
+    "onyomi": "SHI",
+    "kunyomi": "ane",
+    "meaning": "Kakak Perempuan",
+    "example": "お姉さん (Kakak orang lain), 姉妹 (Saudari), 義姉 (Kakak ipar)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 29,
+    "realm": 3,
+    "kanji": "弟",
+    "onyomi": "TEI, DAI",
+    "kunyomi": "otouto",
+    "meaning": "Adik Laki-laki",
+    "example": "弟さん (Adik orang lain), 兄弟 (Bersaudara), 弟子 (Murid)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 30,
+    "realm": 3,
+    "kanji": "妹",
+    "onyomi": "MAI",
+    "kunyomi": "imouto",
+    "meaning": "Adik Perempuan",
+    "example": "妹さん (Adik orang lain), 姉妹 (Bersaudari)",
+    "topic": "Keluarga"
+  },
+  {
+    "id": 31,
+    "realm": 4,
+    "kanji": "行",
+    "onyomi": "KOU, GYOU",
+    "kunyomi": "i-ku",
+    "meaning": "Pergi",
+    "example": "銀行 (Bank), 旅行 (Travel), 行動 (Tindakan)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 32,
+    "realm": 4,
+    "kanji": "見",
+    "onyomi": "KEN",
+    "kunyomi": "mi-ru",
+    "meaning": "Melihat",
+    "example": "花見 (Melihat bunga), 見学 (Karyawisata), 意見 (Pendapat)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 33,
+    "realm": 4,
+    "kanji": "食",
+    "onyomi": "SHOKU",
+    "kunyomi": "ta-beru",
+    "meaning": "Makan",
+    "example": "食堂 (Kantin), 食事 (Makan), 食べ物 (Makanan)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 34,
+    "realm": 4,
+    "kanji": "飲",
+    "onyomi": "IN",
+    "kunyomi": "no-mu",
+    "meaning": "Minum",
+    "example": "飲み物 (Minuman), 飲食店 (Restoran), 飲酒 (Minum alkohol)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 35,
+    "realm": 4,
+    "kanji": "読",
+    "onyomi": "DOKU",
+    "kunyomi": "yo-mu",
+    "meaning": "Membaca",
+    "example": "読書 (Membaca buku), 音読み (Bacaan Onyomi)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 36,
+    "realm": 4,
+    "kanji": "書",
+    "onyomi": "SHO",
+    "kunyomi": "ka-ku",
+    "meaning": "Menulis",
+    "example": "辞書 (Kamus), 教科書 (Buku paket), 図書館 (Perpustakaan)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 37,
+    "realm": 4,
+    "kanji": "聞",
+    "onyomi": "BUN, MON",
+    "kunyomi": "ki-ku",
+    "meaning": "Mendengar",
+    "example": "新聞 (Koran), 聞き取り (Listening), 前代未聞 (Belum pernah terjadi)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 38,
+    "realm": 4,
+    "kanji": "言",
+    "onyomi": "GEN, GON",
+    "kunyomi": "i-u",
+    "meaning": "Berkata",
+    "example": "言葉 (Kosa kata), 言語 (Bahasa), 方言 (Dialek)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 39,
+    "realm": 4,
+    "kanji": "話",
+    "onyomi": "WA",
+    "kunyomi": "hana-su",
+    "meaning": "Berbicara",
+    "example": "会話 (Percakapan), 電話 (Telepon), 話し合い (Diskusi)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 40,
+    "realm": 4,
+    "kanji": "休",
+    "onyomi": "KYUU",
+    "kunyomi": "yasu-mu",
+    "meaning": "Istirahat",
+    "example": "休日 (Hari libur), 休み時間 (Jam istirahat), 夏休み (Libur panas)",
+    "topic": "Aktivitas"
+  },
+  {
+    "id": 41,
+    "realm": 5,
+    "kanji": "学",
+    "onyomi": "GAKU",
+    "kunyomi": "mana-bu",
+    "meaning": "Belajar",
+    "example": "学校 (Sekolah), 学生 (Siswa), 大学 (Universitas)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 42,
+    "realm": 5,
+    "kanji": "校",
+    "onyomi": "KOU",
+    "kunyomi": "-",
+    "meaning": "Sekolah (Bangunan)",
+    "example": "高校 (SMA), 校長 (Kepala sekolah), 校歌 (Lagu sekolah)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 43,
+    "realm": 5,
+    "kanji": "店",
+    "onyomi": "TEN",
+    "kunyomi": "mise",
+    "meaning": "Toko",
+    "example": "店員 (Pegawai toko), 書店 (Toko buku), 売店 (Kios)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 44,
+    "realm": 5,
+    "kanji": "駅",
+    "onyomi": "EKI",
+    "kunyomi": "-",
+    "meaning": "Stasiun",
+    "example": "駅長 (Kepala stasiun), 駅前 (Depan stasiun)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 45,
+    "realm": 5,
+    "kanji": "銀",
+    "onyomi": "GIN",
+    "kunyomi": "-",
+    "meaning": "Perak (Bank)",
+    "example": "銀行 (Bank), 銀色 (Warna perak), 銀メダル (Medali perak)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 46,
+    "realm": 5,
+    "kanji": "社",
+    "onyomi": "SHA",
+    "kunyomi": "yashiro",
+    "meaning": "Perusahaan / Kuil",
+    "example": "会社 (Perusahaan), 社会 (Masyarakat), 神社 (Kuil Shinto)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 47,
+    "realm": 5,
+    "kanji": "国",
+    "onyomi": "KOKU",
+    "kunyomi": "kuni",
+    "meaning": "Negara",
+    "example": "外国 (Luar negeri), 国際 (Internasional), 中国 (China)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 48,
+    "realm": 5,
+    "kanji": "家",
+    "onyomi": "KA, KE",
+    "kunyomi": "ie, uchi",
+    "meaning": "Rumah",
+    "example": "家族 (Keluarga), 家庭 (Rumah tangga), 大家 (Tuan tanah)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 49,
+    "realm": 5,
+    "kanji": "道",
+    "onyomi": "DOU",
+    "kunyomi": "michi",
+    "meaning": "Jalan",
+    "example": "道路 (Jalan raya), 水道 (Saluran air), 北海道 (Hokkaido)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 50,
+    "realm": 5,
+    "kanji": "町",
+    "onyomi": "CHOU",
+    "kunyomi": "machi",
+    "meaning": "Kota Kecil",
+    "example": "町長 (Walikota), 下町 (Pusat kota lama)",
+    "topic": "Tempat"
+  },
+  {
+    "id": 51,
+    "realm": 6,
+    "kanji": "上",
+    "onyomi": "JOU",
+    "kunyomi": "ue, a-geru",
+    "meaning": "Atas, Naik",
+    "example": "上着 (Jaket), 上げる (Menaikkan), 机の上 (Di atas meja)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 52,
+    "realm": 6,
+    "kanji": "下",
+    "onyomi": "KA, GE",
+    "kunyomi": "shita, sa-geru",
+    "meaning": "Bawah, Turun",
+    "example": "地下鉄 (Bawah tanah), 靴下 (Kaos kaki), 下げる (Menurunkan)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 53,
+    "realm": 6,
+    "kanji": "左",
+    "onyomi": "SA",
+    "kunyomi": "hidari",
+    "meaning": "Kiri",
+    "example": "左手 (Tangan kiri), 左側 (Sisi kiri), 左折 (Belok kiri)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 54,
+    "realm": 6,
+    "kanji": "右",
+    "onyomi": "U, YUU",
+    "kunyomi": "migi",
+    "meaning": "Kanan",
+    "example": "右手 (Tangan kanan), 右側 (Sisi kanan), 右折 (Belok kanan)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 55,
+    "realm": 6,
+    "kanji": "中",
+    "onyomi": "CHUU, JU",
+    "kunyomi": "naka",
+    "meaning": "Dalam, Tengah",
+    "example": "中国 (China), 一日中 (Seharian), カバンの中 (Di dalam tas)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 56,
+    "realm": 6,
+    "kanji": "外",
+    "onyomi": "GAI, GE",
+    "kunyomi": "soto",
+    "meaning": "Luar",
+    "example": "外国 (Luar negeri), 外出 (Keluar rumah), 外食 (Makan di luar)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 57,
+    "realm": 6,
+    "kanji": "東",
+    "onyomi": "TOU",
+    "kunyomi": "higashi",
+    "meaning": "Timur",
+    "example": "東京 (Tokyo), 東口 (Pintu timur), 中東 (Timur Tengah)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 58,
+    "realm": 6,
+    "kanji": "西",
+    "onyomi": "SEI, SAI",
+    "kunyomi": "nishi",
+    "meaning": "Barat",
+    "example": "西口 (Pintu barat), 西洋 (Dunia Barat), 関西 (Kansai)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 59,
+    "realm": 6,
+    "kanji": "南",
+    "onyomi": "NAN",
+    "kunyomi": "minami",
+    "meaning": "Selatan",
+    "example": "南口 (Pintu selatan), 東南アジア (Asia Tenggara)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 60,
+    "realm": 6,
+    "kanji": "北",
+    "onyomi": "HOKU",
+    "kunyomi": "kita",
+    "meaning": "Utara",
+    "example": "北海道 (Hokkaido), 北口 (Pintu utara), 南北 (Selatan & Utara)",
+    "topic": "Arah & Posisi"
+  },
+  {
+    "id": 61,
+    "realm": 7,
+    "kanji": "山",
+    "onyomi": "SAN",
+    "kunyomi": "yama",
+    "meaning": "Gunung",
+    "example": "富士山 (Gn. Fuji), 山登り (Mendaki gunung), 火山 (Gunung berapi)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 62,
+    "realm": 7,
+    "kanji": "川",
+    "onyomi": "SEN",
+    "kunyomi": "kawa",
+    "meaning": "Sungai",
+    "example": "ナイル川 (Sg. Nil), 小川 (Sungai kecil), 川沿い (Tepi sungai)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 63,
+    "realm": 7,
+    "kanji": "空",
+    "onyomi": "KUU",
+    "kunyomi": "sora",
+    "meaning": "Langit, Kosong",
+    "example": "空気 (Udara), 空港 (Bandara), 青空 (Langit biru)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 64,
+    "realm": 7,
+    "kanji": "天",
+    "onyomi": "TEN",
+    "kunyomi": "ama",
+    "meaning": "Surga, Langit",
+    "example": "天気 (Cuaca), 天国 (Surga), 天の川 (Bimasakti)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 65,
+    "realm": 7,
+    "kanji": "気",
+    "onyomi": "KI",
+    "kunyomi": "-",
+    "meaning": "Jiwa, Udara",
+    "example": "元気 (Sehat), 気分 (Perasaan), 人気 (Populer)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 66,
+    "realm": 7,
+    "kanji": "雨",
+    "onyomi": "U",
+    "kunyomi": "ame",
+    "meaning": "Hujan",
+    "example": "大雨 (Hujan lebat), 雨季 (Musim hujan), 小雨 (Gerimis)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 67,
+    "realm": 7,
+    "kanji": "雪",
+    "onyomi": "SETSU",
+    "kunyomi": "yuki",
+    "meaning": "Salju",
+    "example": "大雪 (Badai salju), 雪だるま (Boneka salju), 新雪 (Salju baru)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 68,
+    "realm": 7,
+    "kanji": "花",
+    "onyomi": "KA",
+    "kunyomi": "hana",
+    "meaning": "Bunga",
+    "example": "花見 (Hanami), 花火 (Kembang api), 花屋 (Toko bunga)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 69,
+    "realm": 7,
+    "kanji": "海",
+    "onyomi": "KAI",
+    "kunyomi": "umi",
+    "meaning": "Laut",
+    "example": "海外 (Luar negeri), 海水 (Air laut), 北海道 (Hokkaido)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 70,
+    "realm": 7,
+    "kanji": "田",
+    "onyomi": "DEN",
+    "kunyomi": "ta",
+    "meaning": "Sawah",
+    "example": "田んぼ (Sawah), 山田 (Yamada - nama), 水田 (Sawah berair)",
+    "topic": "Alam & Cuaca"
+  },
+  {
+    "id": 71,
+    "realm": 8,
+    "kanji": "文",
+    "onyomi": "BUN, MON",
+    "kunyomi": "fumi",
+    "meaning": "Kalimat, Sastra",
+    "example": "文学 (Sastra), 作文 (Karangan), 文化 (Budaya)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 72,
+    "realm": 8,
+    "kanji": "字",
+    "onyomi": "JI",
+    "kunyomi": "-",
+    "meaning": "Huruf",
+    "example": "漢字 (Kanji), 文字 (Huruf/Karakter), ローマ字 (Romaji)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 73,
+    "realm": 8,
+    "kanji": "本",
+    "onyomi": "HON",
+    "kunyomi": "moto",
+    "meaning": "Buku, Asal",
+    "example": "本屋 (Toko buku), 日本 (Jepang), 本当 (Benar-benar)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 74,
+    "realm": 8,
+    "kanji": "名",
+    "onyomi": "MEI, MYOU",
+    "kunyomi": "na",
+    "meaning": "Nama",
+    "example": "名前 (Nama), 有名 (Terkenal), 名刺 (Kartu nama)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 75,
+    "realm": 8,
+    "kanji": "語",
+    "onyomi": "GO",
+    "kunyomi": "kata-ru",
+    "meaning": "Bahasa, Kata",
+    "example": "日本語 (Bahasa Jepang), 英語 (Bahasa Inggris), 物語 (Cerita)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 76,
+    "realm": 8,
+    "kanji": "英",
+    "onyomi": "EI",
+    "kunyomi": "-",
+    "meaning": "Inggris, Unggul",
+    "example": "英語 (Bahasa Inggris), 英国 (Inggris Raya), 英会話 (Percakapan Inggris)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 77,
+    "realm": 8,
+    "kanji": "紙",
+    "onyomi": "SHI",
+    "kunyomi": "kami",
+    "meaning": "Kertas",
+    "example": "手紙 (Surat), 折り紙 (Origami), 新聞紙 (Kertas koran)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 78,
+    "realm": 8,
+    "kanji": "手",
+    "onyomi": "SHU",
+    "kunyomi": "te",
+    "meaning": "Tangan",
+    "example": "手紙 (Surat), 上手 (Pintar/Mahir), 切手 (Prangko)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 79,
+    "realm": 8,
+    "kanji": "力",
+    "onyomi": "RYOKU, RIKI",
+    "kunyomi": "chikara",
+    "meaning": "Tenaga",
+    "example": "力持ち (Kuat), 協力 (Kerjasama), 能力 (Kemampuan)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 80,
+    "realm": 8,
+    "kanji": "作",
+    "onyomi": "SAKU, SA",
+    "kunyomi": "tsuku-ru",
+    "meaning": "Membuat",
+    "example": "作文 (Karangan), 作り方 (Cara membuat), 作品 (Karya)",
+    "topic": "Sekolah & Pekerjaan"
+  },
+  {
+    "id": 81,
+    "realm": 9,
+    "kanji": "車",
+    "onyomi": "SHA",
+    "kunyomi": "kuruma",
+    "meaning": "Mobil",
+    "example": "電車 (Kereta api), 自動車 (Mobil), 自転車 (Sepeda)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 82,
+    "realm": 9,
+    "kanji": "電",
+    "onyomi": "DEN",
+    "kunyomi": "-",
+    "meaning": "Listrik",
+    "example": "電車 (Kereta api), 電気 (Listrik), 電話 (Telepon)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 83,
+    "realm": 9,
+    "kanji": "自",
+    "onyomi": "JI, SHI",
+    "kunyomi": "mizuka-ra",
+    "meaning": "Diri Sendiri",
+    "example": "自分 (Diri sendiri), 自動車 (Mobil), 自転車 (Sepeda)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 84,
+    "realm": 9,
+    "kanji": "転",
+    "onyomi": "TEN",
+    "kunyomi": "koro-bu",
+    "meaning": "Berputar",
+    "example": "運転 (Menyetir), 自転車 (Sepeda), 回転 (Perputaran)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 85,
+    "realm": 9,
+    "kanji": "歩",
+    "onyomi": "HO, BU",
+    "kunyomi": "aru-ku",
+    "meaning": "Berjalan",
+    "example": "散歩 (Jalan-jalan), 歩道 (Trotoar), 一歩 (Satu langkah)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 86,
+    "realm": 9,
+    "kanji": "入",
+    "onyomi": "NYUU",
+    "kunyomi": "hai-ru, i-reru",
+    "meaning": "Masuk",
+    "example": "入口 (Pintu masuk), 入学 (Masuk sekolah), 輸入 (Impor)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 87,
+    "realm": 9,
+    "kanji": "出",
+    "onyomi": "SHUTSU",
+    "kunyomi": "de-ru, da-su",
+    "meaning": "Keluar",
+    "example": "出口 (Pintu keluar), 出発 (Berangkat), 外出 (Keluar rumah)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 88,
+    "realm": 9,
+    "kanji": "早",
+    "onyomi": "SOU",
+    "kunyomi": "haya-i",
+    "meaning": "Cepat, Awal",
+    "example": "早い (Cepat), 早起き (Bangun pagi), 早口 (Bicara cepat)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 89,
+    "realm": 9,
+    "kanji": "止",
+    "onyomi": "SHI",
+    "kunyomi": "to-maru",
+    "meaning": "Berhenti",
+    "example": "中止 (Batal), 通行止め (Dilarang lewat), 立ち入り禁止 (Dilarang masuk)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 90,
+    "realm": 9,
+    "kanji": "走",
+    "onyomi": "SOU",
+    "kunyomi": "hashi-ru",
+    "meaning": "Berlari",
+    "example": "走る (Berlari), 競走 (Lomba lari), 逃走 (Kabur)",
+    "topic": "Transportasi"
+  },
+  {
+    "id": 91,
+    "realm": 10,
+    "kanji": "肉",
+    "onyomi": "NIKU",
+    "kunyomi": "-",
+    "meaning": "Daging",
+    "example": "牛肉 (Daging sapi), 鶏肉 (Daging ayam), 肉屋 (Toko daging)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 92,
+    "realm": 10,
+    "kanji": "魚",
+    "onyomi": "GYO",
+    "kunyomi": "sakana",
+    "meaning": "Ikan",
+    "example": "魚屋 (Toko ikan), 金魚 (Ikan mas), 人魚 (Putri duyung)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 93,
+    "realm": 10,
+    "kanji": "米",
+    "onyomi": "BEI, MAI",
+    "kunyomi": "kome",
+    "meaning": "Beras",
+    "example": "米国 (Amerika Serikat), 白米 (Nasi putih), 新米 (Beras baru)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 94,
+    "realm": 10,
+    "kanji": "茶",
+    "onyomi": "CHA, SA",
+    "kunyomi": "-",
+    "meaning": "Teh",
+    "example": "お茶 (Teh), 紅茶 (Teh hitam), 茶色 (Warna coklat)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 95,
+    "realm": 10,
+    "kanji": "酒",
+    "onyomi": "SHU",
+    "kunyomi": "sake",
+    "meaning": "Alkohol",
+    "example": "日本酒 (Sake Jepang), 居酒屋 (Kedai minum), 飲酒運転 (Mabuk saat nyetir)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 96,
+    "realm": 10,
+    "kanji": "牛",
+    "onyomi": "GYUU",
+    "kunyomi": "ushi",
+    "meaning": "Sapi",
+    "example": "牛乳 (Susu sapi), 牛肉 (Daging sapi), 子牛 (Anak sapi)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 97,
+    "realm": 10,
+    "kanji": "鳥",
+    "onyomi": "CHOU",
+    "kunyomi": "tori",
+    "meaning": "Burung, Ayam",
+    "example": "焼き鳥 (Sate ayam), 小鳥 (Burung kecil), 白鳥 (Angsa)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 98,
+    "realm": 10,
+    "kanji": "飯",
+    "onyomi": "HAN",
+    "kunyomi": "meshi",
+    "meaning": "Nasi, Makanan",
+    "example": "ご飯 (Nasi/Makan), 昼ご飯 (Makan siang), 晩ご飯 (Makan malam)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 99,
+    "realm": 10,
+    "kanji": "物",
+    "onyomi": "BUTSU, MOTSU",
+    "kunyomi": "mono",
+    "meaning": "Benda",
+    "example": "食べ物 (Makanan), 飲み物 (Minuman), 買い物 (Belanja)",
+    "topic": "Makanan & Minuman"
+  },
+  {
+    "id": 100,
+    "realm": 10,
+    "kanji": "好",
+    "onyomi": "KOU",
+    "kunyomi": "su-ki",
+    "meaning": "Suka",
+    "example": "好き (Suka), 大好き (Sangat suka), お好み焼き (Okonomiyaki)",
+    "topic": "Makanan & Minuman"
+  }
+]

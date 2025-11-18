@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kanji RPG Quest</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        /* Hide Scrollbar & Selection */
+        body::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+        
+        /* VFX Layer */
+        #vfx-layer { pointer-events: none; overflow: hidden; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white font-sans overflow-x-hidden min-h-screen pb-10 transition-colors duration-100">
+
+    <div id="vfx-layer" class="fixed inset-0 z-[60] flex items-center justify-center">
+        <svg id="sword-slash" class="absolute w-full h-full opacity-0" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M-10,110 L110,-10" stroke="white" stroke-width="2" fill="none" filter="drop-shadow(0 0 10px cyan)" />
+        </svg>
+        <svg id="demon-claw" class="absolute w-64 h-64 opacity-0" viewBox="0 0 100 100">
+            <path d="M10,10 Q50,50 90,90" stroke="#ef4444" stroke-width="8" fill="none" stroke-linecap="round" />
+            <path d="M20,5 Q60,45 100,85" stroke="#ef4444" stroke-width="8" fill="none" stroke-linecap="round" />
+            <path d="M0,20 Q40,60 80,100" stroke="#ef4444" stroke-width="8" fill="none" stroke-linecap="round" />
+        </svg>
+        <div id="damage-overlay" class="absolute inset-0 flex items-center justify-center opacity-0 z-[70]">
+            <h1 class="text-5xl font-black text-red-600 border-text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)] rotate-12">DISERANG IBLIS!<br><span class="text-3xl text-white">-10 XP</span></h1>
+        </div>
+    </div>
+
+    <div id="gameModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm flex items-center justify-center opacity-0 transition-opacity duration-300 px-4">
+        <div class="bg-slate-800 border border-purple-500/50 rounded-xl p-5 max-w-xs w-full text-center shadow-[0_0_40px_rgba(168,85,247,0.2)] transform scale-90" id="modalContent">
+            <div id="modalIcon" class="text-4xl mb-3 animate-bounce">⚠️</div>
+            <h3 id="modalTitle" class="text-lg font-bold text-yellow-400 mb-2 uppercase tracking-wider">JUDUL</h3>
+            <p id="modalMessage" class="text-slate-300 text-sm mb-6 leading-relaxed">Pesan modal.</p>
+            <button onclick="closeModal()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-sm font-bold py-3 rounded-lg shadow-lg active:scale-95 transition-transform">
+                Lanjut
+            </button>
+        </div>
+    </div>
+
+    <nav class="fixed top-0 left-0 w-full bg-slate-900/95 backdrop-blur border-b border-slate-800 z-40 px-4 py-3 flex justify-between items-center shadow-lg">
+        <div class="flex items-center gap-2">
+            <span class="text-xl">🏯</span>
+            <h1 class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500 text-base">KANJI RPG</h1>
+        </div>
+        <div class="flex gap-3 text-xs font-mono">
+            <div class="flex flex-col items-end">
+                <span class="text-[10px] text-slate-500 uppercase">Rank</span>
+                <span id="navRank" class="text-yellow-400 font-bold">Apprentice</span>
+            </div>
+            <div class="flex flex-col items-end">
+                <span class="text-[10px] text-slate-500 uppercase">XP</span>
+                <span id="navXP" class="text-blue-400 font-bold">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="screen-home" class="pt-20 px-4 flex flex-col items-center justify-center min-h-screen text-center relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-purple-600/20 blur-[80px] rounded-full -z-10"></div>
+        
+        <h1 id="homeTitle" class="text-4xl md:text-6xl font-black mb-3 drop-shadow-lg tracking-tight">
+            <span class="block text-white">KANJI</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">QUEST</span>
+        </h1>
+        
+        <div id="homeButtons" class="flex flex-col gap-3 w-full max-w-[280px] mt-8">
+            <button onclick="startGame()" class="w-full bg-yellow-500 text-slate-900 font-bold py-3 rounded-xl shadow-[0_0_15px_rgba(234,179,8,0.3)] active:scale-95 transition-transform flex items-center justify-center gap-2 text-sm">
+                <span>⚔️</span> MULAI PETUALANGAN
+            </button>
+            <a href="/stats" class="w-full bg-slate-800 text-slate-300 font-bold py-3 rounded-xl border border-slate-700 active:scale-95 transition-transform text-center text-sm">
+                📊 STATISTIK
+            </a>
+        </div>
+    </section>
+
+    <section id="screen-map" class="hidden pt-24 pb-10 px-4 max-w-3xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-white border-l-4 border-purple-500 pl-3">Peta Dunia</h2>
+            <button onclick="showScreen('screen-home')" class="text-slate-500 hover:text-white text-xs underline">Kembali</button>
+        </div>
+        <div id="realmGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+    </section>
+
+    <section id="screen-battle" class="hidden pt-20 px-4 flex flex-col items-center min-h-[90vh] max-w-sm mx-auto justify-between pb-6">
+        
+        <div class="w-full flex justify-between items-end mb-4 border-b border-slate-800 pb-2">
+            <div>
+                <h3 id="battleTitle" class="text-base font-bold text-purple-400">Realm 1</h3>
+                <p class="text-[10px] text-slate-500">Sisa Monster: <span id="monsterCount">0</span></p>
+            </div>
+            <span id="battleProgress" class="bg-slate-800 px-2 py-1 rounded text-[10px] font-mono text-slate-300 border border-slate-700">0/10</span>
+        </div>
+
+        <div class="relative w-full aspect-[4/5] group perspective-[1000px] cursor-pointer mb-4" onclick="flipCard()">
+            <div id="flashcard" class="relative w-full h-full transition-all duration-300 [transform-style:preserve-3d]">
+                <div class="absolute inset-0 bg-slate-800 border border-slate-600 rounded-2xl flex flex-col items-center justify-center shadow-2xl [backface-visibility:hidden]">
+                    <span class="text-[10px] uppercase text-slate-500 tracking-widest mb-2">KANJI MONSTER</span>
+                    <h1 id="cardKanji" class="text-7xl font-black text-white mb-4">?</h1>
+                    <div class="px-3 py-1 bg-slate-900 rounded-full">
+                        <p class="text-purple-400 text-[10px] animate-pulse">Tap kartu untuk melihat skill</p>
+                    </div>
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 border border-purple-500 rounded-2xl flex flex-col items-center justify-center p-4 shadow-2xl [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                    <div class="text-center space-y-3 w-full">
+                        <div>
+                            <p class="text-[10px] text-slate-500 uppercase">Onyomi / Kunyomi</p>
+                            <p id="cardYomi" class="text-yellow-400 font-mono font-bold text-sm break-words">-</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-slate-500 uppercase">Arti</p>
+                            <h3 id="cardMeaning" class="text-xl font-bold text-white leading-tight">-</h3>
+                        </div>
+                        <div class="bg-slate-950/50 p-3 rounded-lg w-full text-left border border-slate-800">
+                            <p class="text-[10px] text-slate-500 mb-1 text-center uppercase tracking-wider">Contoh</p>
+                            <div id="cardExample" class="text-cyan-300 text-xs font-mono leading-relaxed text-center space-y-1">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full flex gap-3 mt-auto z-10">
+            <button onclick="handleForgot()" class="flex-1 bg-rose-900/20 border border-rose-900/50 text-rose-400 py-3 rounded-xl text-xs font-bold hover:bg-rose-900/40 transition-colors flex flex-col items-center justify-center gap-1 active:scale-95">
+                <span>🧠 LUPA</span>
+                <span class="text-[9px] opacity-70 text-red-500 font-black">-10 HP</span>
+            </button>
+
+            <button onclick="markMastered()" class="flex-[2] bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-bold shadow-lg active:scale-95 flex flex-col items-center justify-center gap-1 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span class="text-sm">⚔️ SERANG (HAFAL)</span>
+                <span class="text-[10px] bg-white/20 px-2 rounded-sm text-white">+10 XP</span>
+            </button>
+        </div>
+    </section>
+
+    <script>
+        let kanjiData = [], currentRealmData = [], currentCardIndex = 0, isFlipped = false, onModalClose = null;
+        const defaultPlayer = { learnedKanji: [], xp: 0, currentRank: "Apprentice", streak: 0, realmsCompleted: [] };
+        let player = JSON.parse(localStorage.getItem('rpgKanjiPlayer')) || defaultPlayer;
+
+        window.onload = () => {
+            runEntranceAnimations();
+            updateUIStats();
+            fetchKanjiData();
+        };
+
+        function runEntranceAnimations() {
+            gsap.from("#homeTitle", { y: -30, opacity: 0, duration: 1, ease: "power2.out" });
+            gsap.from("#homeButtons > *", { y: 30, opacity: 0, duration: 0.6, delay: 0.4, stagger: 0.1, clearProps: "all" });
+        }
+
+        async function fetchKanjiData() {
+            try {
+                const response = await fetch('/api/kanji');
+                const result = await response.json();
+                if (result.success) kanjiData = result.data;
+            } catch (error) { console.error(error); }
+        }
+
+        function showScreen(screenId) {
+            ['screen-home', 'screen-map', 'screen-battle'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            const target = document.getElementById(screenId);
+            target.classList.remove('hidden');
+            gsap.fromTo(target, {opacity: 0}, {opacity: 1, duration: 0.3});
+            if (screenId === 'screen-map') renderMap();
+        }
+
+        function startGame() {
+            kanjiData.length > 0 ? showScreen('screen-map') : fetchKanjiData().then(() => {
+                kanjiData.length > 0 ? showScreen('screen-map') : showModal("Error", "Server offline.", "❌");
+            });
+        }
+
+        // --- MAP LOGIC ---
+        function renderMap() {
+            const grid = document.getElementById('realmGrid');
+            grid.innerHTML = '';
+            const realms = ["Hari & Tanggal", "Bulan & Musim", "Keluarga", "Aktivitas", "Tempat", "Arah", "Alam", "Sekolah", "Transportasi", "Makanan"];
+            let isUnlocked = true;
+
+            realms.forEach((name, index) => {
+                const realmId = index + 1;
+                const realmKanji = kanjiData.filter(k => k.realm === realmId);
+                const total = realmKanji.length > 0 ? realmKanji.length : 10;
+                const mastered = realmKanji.filter(k => player.learnedKanji.includes(k.id)).length;
+                const isComplete = realmKanji.length > 0 && mastered >= total;
+                const card = document.createElement('div');
+
+                if (!isUnlocked) {
+                    card.className = `relative bg-slate-900/60 p-4 rounded-xl border border-slate-800 flex items-center gap-4 opacity-60 grayscale`;
+                    card.innerHTML = `<div class="text-2xl">🔒</div><div><h3 class="text-sm font-bold text-slate-500">Realm ${realmId}</h3><p class="text-[10px] text-slate-600">Terkunci</p></div>`;
+                } else if (realmKanji.length === 0) {
+                    card.className = `relative bg-slate-800/50 p-4 rounded-xl border border-dashed border-slate-700`;
+                    card.innerHTML = `<div class="flex items-center gap-3 opacity-50"><span class="text-xl">🚧</span><div><h3 class="text-sm font-bold text-slate-500">Realm ${realmId}</h3><p class="text-[10px]">Kabut Tebal...</p></div></div>`;
+                } else {
+                    card.className = `relative bg-slate-800 p-4 rounded-xl border ${isComplete ? 'border-yellow-500/50' : 'border-slate-700 hover:border-purple-500'} transition-all cursor-pointer active:scale-95`;
+                    card.onclick = () => enterRealm(realmId);
+                    card.innerHTML = `
+                        <div class="flex justify-between items-center mb-2"><span class="text-xs font-bold ${isComplete ? 'text-yellow-400' : 'text-purple-400'}">REALM ${realmId}</span><span class="text-xl">${isComplete ? '👑' : '🏰'}</span></div>
+                        <h3 class="text-base font-bold text-white mb-3">${name}</h3>
+                        <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden"><div class="bg-gradient-to-r ${isComplete ? 'from-yellow-500 to-orange-500' : 'from-purple-600 to-blue-500'} h-full" style="width: ${(mastered/total)*100}%"></div></div>
+                        <p class="text-right text-[10px] text-slate-400 mt-1 font-mono">${mastered}/${total}</p>`;
+                }
+                grid.appendChild(card);
+                if (!isComplete) isUnlocked = false;
+            });
+        }
+
+        function enterRealm(realmId) {
+            currentRealmData = kanjiData.filter(k => k.realm === realmId && !player.learnedKanji.includes(k.id));
+            if (currentRealmData.length === 0) { showModal("Realm Selesai", "Semua monster dikalahkan!", "🏆"); return; }
+            currentCardIndex = 0;
+            showScreen('screen-battle');
+            document.getElementById('battleTitle').innerText = `Realm ${realmId}`;
+            loadCard();
+        }
+
+        function loadCard() {
+            if (currentCardIndex >= currentRealmData.length) { showModal("Victory!", "Wave Selesai!", "🎉", () => showScreen('screen-map')); return; }
+            const data = currentRealmData[currentCardIndex];
+            isFlipped = false;
+            document.getElementById('flashcard').style.transform = "rotateY(0deg)";
+            document.getElementById('cardKanji').innerText = data.kanji;
+            document.getElementById('cardYomi').innerText = `${data.onyomi} / ${data.kunyomi}`;
+            document.getElementById('cardMeaning').innerText = data.meaning;
+            document.getElementById('cardExample').innerHTML = data.example.replace(/,/g, '<br/>');
+            
+            const remaining = currentRealmData.length - currentCardIndex;
+            document.getElementById('monsterCount').innerText = remaining;
+            document.getElementById('battleProgress').innerText = `${currentCardIndex + 1}/${currentRealmData.length}`;
+        }
+
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.style.transform = isFlipped ? "rotateY(0deg)" : "rotateY(180deg)";
+            isFlipped = !isFlipped;
+        }
+
+        // --- ⚔️ LOGIC SERANG (HAFAL) & REDIRECT QUIZ ---
+        function markMastered() {
+            const currentKanji = currentRealmData[currentCardIndex];
+            const cardRect = document.getElementById('flashcard').getBoundingClientRect();
+            const centerX = cardRect.left + cardRect.width / 2;
+            const centerY = cardRect.top + cardRect.height / 2;
+
+            // 1. Save Data
+            if (!player.learnedKanji.includes(currentKanji.id)) {
+                player.learnedKanji.push(currentKanji.id);
+                player.xp += 10;
+                saveData();
+            }
+
+            // 2. VFX (Slash & Particles)
+            const slash = document.getElementById('sword-slash');
+            gsap.fromTo(slash, {opacity: 1, scale: 0.5, rotation: -45}, {opacity: 0, scale: 1.5, rotation: 0, duration: 0.4});
+            gsap.to("body", { backgroundColor: "#14532d", duration: 0.1, yoyo: true, repeat: 1, onComplete: () => gsap.set("body", {backgroundColor: "#0f172a"}) });
+            spawnParticles(centerX, centerY, "gold");
+            showFloatingText("+10 XP", "text-green-400", centerX, centerY - 100);
+
+            // 3. Animation & Check Logic
+            gsap.to("#flashcard", {
+                x: 400, rotation: 45, opacity: 0, duration: 0.4, delay: 0.1,
+                onComplete: () => {
+                    // === CHECK LEVEL UP EXAM TRIGGER (REDIRECT) ===
+                    if (player.learnedKanji.length > 0 && player.learnedKanji.length % 10 === 0) {
+                        // Delay 500ms agar user sempat melihat efek slash/score
+                        setTimeout(() => {
+                            window.location.href = '/quiz';
+                        }, 500);
+                    } else {
+                        currentCardIndex++;
+                        gsap.set("#flashcard", { x: 0, rotation: 0, opacity: 1 });
+                        loadCard();
+                    }
+                }
+            });
+        }
+
+        // --- 🧠 LOGIC LUPA (FORGOT) ---
+        function handleForgot() {
+            const penalty = 10;
+            player.xp = Math.max(0, player.xp - penalty);
+            saveData();
+
+            const currentCard = currentRealmData[currentCardIndex];
+            currentRealmData.push(currentCard); // RE-QUEUE
+
+            // VFX
+            const claw = document.getElementById('demon-claw');
+            const damageOverlay = document.getElementById('damage-overlay');
+            gsap.fromTo(claw, {opacity: 1, scale: 2, rotation: -20}, {opacity: 0, scale: 1, rotation: 0, duration: 0.5, ease: "power4.out"});
+            gsap.fromTo(damageOverlay, {opacity: 0, scale: 0.5}, {opacity: 1, scale: 1, duration: 0.2, yoyo: true, repeat: 1});
+            gsap.to("body", { backgroundColor: "#450a0a", duration: 0.1, yoyo: true, repeat: 3, onComplete: () => gsap.set("body", {backgroundColor: "#0f172a"}) });
+            gsap.to("body", { x: 20, duration: 0.05, yoyo: true, repeat: 5 }); 
+
+            gsap.to("#flashcard", {
+                x: -50, rotation: -10, duration: 0.05, yoyo: true, repeat: 5,
+                onComplete: () => {
+                    currentCardIndex++;
+                    gsap.set("#flashcard", { x: 0, rotation: 0 });
+                    loadCard();
+                }
+            });
+        }
+
+        // --- VFX FUNCTIONS ---
+        function spawnParticles(x, y, color = "yellow") {
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 6 + 4;
+                particle.className = `absolute rounded-full pointer-events-none z-[70] ${color === 'red' ? 'bg-red-500 shadow-[0_0_10px_red]' : 'bg-yellow-400 shadow-[0_0_10px_gold]'}`;
+                particle.style.width = `${size}px`; particle.style.height = `${size}px`;
+                particle.style.left = `${x}px`; particle.style.top = `${y}px`;
+                document.body.appendChild(particle);
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 100 + 50;
+                gsap.to(particle, { x: Math.cos(angle) * velocity, y: Math.sin(angle) * velocity, opacity: 0, duration: 0.6, ease: "power2.out", onComplete: () => particle.remove() });
+            }
+        }
+
+        function showFloatingText(text, color, x, y) {
+            const el = document.createElement('div');
+            el.innerText = text;
+            el.className = `fixed z-[80] font-black text-2xl pointer-events-none ${color} drop-shadow-md`;
+            el.style.left = `${x}px`; el.style.top = `${y}px`;
+            document.body.appendChild(el);
+            gsap.to(el, { y: -50, opacity: 0, duration: 1, ease: "power1.out", onComplete: () => el.remove() });
+        }
+
+        function updateRank() {
+            const count = player.learnedKanji.length;
+            if (count >= 90) player.currentRank = "God Tier";
+            else if (count >= 60) player.currentRank = "Master";
+            else if (count >= 30) player.currentRank = "Adept";
+            else if (count >= 10) player.currentRank = "Rookie";
+            else player.currentRank = "Apprentice";
+            updateUIStats();
+        }
+        function updateUIStats() { document.getElementById('navRank').innerText = player.currentRank; document.getElementById('navXP').innerText = player.xp; }
+        function saveData() { localStorage.setItem('rpgKanjiPlayer', JSON.stringify(player)); updateUIStats(); }
+        function showModal(title, message, icon = "ℹ️", callback = null) {
+            document.getElementById('modalTitle').innerText = title; document.getElementById('modalMessage').innerText = message; document.getElementById('modalIcon').innerText = icon;
+            onModalClose = callback;
+            const modal = document.getElementById('gameModal'); const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden'); gsap.to(modal, { opacity: 1, duration: 0.2 }); gsap.fromTo(content, { scale: 0.8 }, { scale: 1, duration: 0.3, ease: "back.out(1.7)" });
+        }
+        function closeModal() {
+            const modal = document.getElementById('gameModal');
+            gsap.to(modal, { opacity: 0, duration: 0.2, onComplete: () => { modal.classList.add('hidden'); if (onModalClose) { onModalClose(); onModalClose = null; } } });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Stats - Kanji RPG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body class="bg-slate-900 text-white font-sans p-6">
+
+    <div class="max-w-3xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-400">
+                PLAYER STATUS
+            </h1>
+            <a href="/" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-lg text-sm text-slate-300 transition-colors">
+                ⬅ Kembali ke Game
+            </a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center">
+                <span class="text-slate-400 text-xs uppercase">Total XP</span>
+                <h2 id="statXP" class="text-2xl font-bold text-blue-400">0</h2>
+            </div>
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center">
+                <span class="text-slate-400 text-xs uppercase">Kanji Mastered</span>
+                <h2 id="statCount" class="text-2xl font-bold text-green-400">0/100</h2>
+            </div>
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center">
+                <span class="text-slate-400 text-xs uppercase">Current Rank</span>
+                <h2 id="statRank" class="text-xl font-bold text-yellow-400">-</h2>
+            </div>
+            <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center">
+                <span class="text-slate-400 text-xs uppercase">Boss Access</span>
+                <h2 id="statBoss" class="text-xl font-bold text-red-500">LOCKED</h2>
+            </div>
+        </div>
+
+        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Mastery Progress</h3>
+            <div id="chart"></div>
+        </div>
+        
+        <div class="mt-8 text-center">
+             <button onclick="resetProgress()" class="text-red-500 text-xs hover:text-red-400 underline">
+                ⚠ Reset Semua Progress (Hati-hati)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Load Data
+        const player = JSON.parse(localStorage.getItem('rpgKanjiPlayer')) || { learnedKanji: [], xp: 0, currentRank: "Apprentice" };
+
+        // Populate Text Stats
+        document.getElementById('statXP').innerText = player.xp;
+        document.getElementById('statCount').innerText = player.learnedKanji.length;
+        document.getElementById('statRank').innerText = player.currentRank;
+        
+        if(player.currentRank === "God Tier") {
+            document.getElementById('statBoss').innerText = "UNLOCKED";
+            document.getElementById('statBoss').classList.replace("text-red-500", "text-green-500");
+        }
+
+        // ApexCharts Config
+        const options = {
+            series: [player.learnedKanji.length],
+            chart: {
+                height: 350,
+                type: 'radialBar',
+                background: 'transparent'
+            },
+            plotOptions: {
+                radialBar: {
+                    startAngle: -135,
+                    endAngle: 135,
+                    hollow: {
+                        margin: 15,
+                        size: '70%',
+                        background: 'transparent',
+                    },
+                    dataLabels: {
+                        show: true,
+                        name: {
+                            offsetY: -10,
+                            show: true,
+                            color: '#888',
+                            fontSize: '17px'
+                        },
+                        value: {
+                            offsetY: 10,
+                            color: '#fff',
+                            fontSize: '36px',
+                            show: true,
+                        }
+                    }
+                }
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shade: 'dark',
+                    type: 'horizontal',
+                    shadeIntensity: 0.5,
+                    gradientToColors: ['#ABE5A1'],
+                    inverseColors: true,
+                    opacityFrom: 1,
+                    opacityTo: 1,
+                    stops: [0, 100]
+                }
+            },
+            stroke: {
+                lineCap: 'round'
+            },
+            labels: ['Percent'],
+            colors: ['#20E647']
+        };
+
+        const chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+        function resetProgress() {
+            if(confirm("Yakin ingin menghapus semua progress?")) {
+                localStorage.removeItem('rpgKanjiPlayer');
+                window.location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
