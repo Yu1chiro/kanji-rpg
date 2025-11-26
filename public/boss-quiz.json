@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "prefix": "あした ",
+    "highlight": "がっこう",
+    "suffix": " へ いきます。",
+    "answer": "学校",
+    "options": ["学校", "学高", "校学", "学交"]
+  },
+  {
+    "id": 2,
+    "prefix": "まいにち ",
+    "highlight": "たべます",
+    "suffix": "。",
+    "answer": "食べます",
+    "options": ["食べます", "飲みます", "浴びます", "会べます"]
+  },
+  {
+    "id": 3,
+    "prefix": "あの ",
+    "highlight": "ひと",
+    "suffix": " は だれですか。",
+    "answer": "人",
+    "options": ["人", "入", "大", "木"]
+  },
+  {
+    "id": 4,
+    "prefix": "としょかんで ほんを ",
+    "highlight": "よみます",
+    "suffix": "。",
+    "answer": "読みます",
+    "options": ["読みます", "語みます", "話みます", "見みます"]
+  },
+  {
+    "id": 5,
+    "prefix": "きょうは ",
+    "highlight": "げつようび",
+    "suffix": " です。",
+    "answer": "月曜日",
+    "options": ["月曜日", "日曜日", "木曜日", "金曜日"]
+  },
+  {
+    "id": 6,
+    "prefix": "わたしの ",
+    "highlight": "なまえ",
+    "suffix": " は タナカです。",
+    "answer": "名前",
+    "options": ["名前", "名刺", "名字", "各前"]
+  },
+  {
+    "id": 7,
+    "prefix": "えきの ",
+    "highlight": "まえ",
+    "suffix": " で あいましょう。",
+    "answer": "前",
+    "options": ["前", "先", "後", "間"]
+  },
+  {
+    "id": 8,
+    "prefix": "きれいな ",
+    "highlight": "はな",
+    "suffix": " を かいました。",
+    "answer": "花",
+    "options": ["花", "化", "草", "茶"]
+  },
+  {
+    "id": 9,
+    "prefix": "やまかわさんは ",
+    "highlight": "くるま",
+    "suffix": " が すきです。",
+    "answer": "車",
+    "options": ["車", "東", "重", "動"]
+  },
+  {
+    "id": 10,
+    "prefix": "",
+    "highlight": "でんしゃ",
+    "suffix": " で かえります。",
+    "answer": "電車",
+    "options": ["電車", "電気", "電話", "雷車"]
+  },
+  {
+    "id": 11,
+    "prefix": "まいにち コーヒーを ",
+    "highlight": "のみます",
+    "suffix": "。",
+    "answer": "飲みます",
+    "options": ["飲みます", "飲ます", "歌みます", "息みます"]
+  },
+  {
+    "id": 12,
+    "prefix": "のどが かわいたので、",
+    "highlight": "みず",
+    "suffix": " を のみました。",
+    "answer": "水",
+    "options": ["水", "永", "氷", "泉"]
+  },
+  {
+    "id": 13,
+    "prefix": "デパートで たくさん ",
+    "highlight": "かいもの",
+    "suffix": " を しました。",
+    "answer": "買い物",
+    "options": ["買い物", "買物", "買い物", "買う物"]
+  },
+  {
+    "id": 14,
+    "prefix": "いま ",
+    "highlight": "なんじ",
+    "suffix": " ですか。",
+    "answer": "何時",
+    "options": ["何時", "何寺", "何持", "何辞"]
+  },
+  {
+    "id": 15,
+    "prefix": "らいしゅうは ",
+    "highlight": "なつやすみ",
+    "suffix": " が あります。",
+    "answer": "夏休み",
+    "options": ["夏休み", "夏止み", "夏休", "夏休間"]
+  },
+  {
+    "id": 16,
+    "prefix": "わたしは ",
+    "highlight": "だいがくせい",
+    "suffix": " です。",
+    "answer": "大学生",
+    "options": ["大学生", "大学牛", "大人学", "大生学"]
+  },
+  {
+    "id": 17,
+    "prefix": "わたしの ",
+    "highlight": "あに",
+    "suffix": " は エンジニアです。",
+    "answer": "兄",
+    "options": ["兄", "弟", "姉", "妹"]
+  },
+  {
+    "id": 18,
+    "prefix": "こうばんを ",
+    "highlight": "みぎ",
+    "suffix": " へ まがってください。",
+    "answer": "右",
+    "options": ["右", "左", "友", "右手"]
+  },
+  {
+    "id": 19,
+    "prefix": "きょうは ",
+    "highlight": "あめ",
+    "suffix": " が ふっています。",
+    "answer": "雨",
+    "options": ["雨", "雪", "雷", "雰"]
+  },
+  {
+    "id": 20,
+    "prefix": "かみ に なまえを ",
+    "highlight": "かいて",
+    "suffix": " ください。",
+    "answer": "書いて",
+    "options": ["書いて", "読んで", "話して", "言って"]
+  },
+  {
+    "id": 21,
+    "prefix": "わたしは ぎんこうの ",
+    "highlight": "かいしゃ",
+    "suffix": " に つとめています。",
+    "answer": "会社",
+    "options": ["会社", "社学", "会者", "公社"]
+  },
+  {
+    "id": 22,
+    "prefix": "スーパーで おいしい ",
+    "highlight": "さかな",
+    "suffix": " を かいました。",
+    "answer": "魚",
+    "options": ["魚", "鳥", "肉", "羊"]
+  },
+  {
+    "id": 23,
+    "prefix": "こうえんで ",
+    "highlight": "こども",
+    "suffix": " が あそんでいます。",
+    "answer": "子供",
+    "options": ["子供", "供子", "子人", "男子"]
+  },
+  {
+    "id": 24,
+    "prefix": "でぐちは ",
+    "highlight": "ひがしぐち",
+    "suffix": " と にしぐち が あります。",
+    "answer": "東口",
+    "options": ["東口", "東出", "東入", "東門"]
+  },
+  {
+    "id": 25,
+    "prefix": "なにか ",
+    "highlight": "いいたい",
+    "suffix": " ことは ありますか。",
+    "answer": "言いたい",
+    "options": ["言いたい", "話したい", "読みたい", "聞きたい"]
+  },
+  {
+    "id": 26,
+    "prefix": "わたしの ",
+    "highlight": "ちち",
+    "suffix": " は きょねん 50さいに なりました。",
+    "answer": "父",
+    "options": ["父", "母", "兄", "弟"]
+  },
+  {
+    "id": 27,
+    "prefix": "じゅぎょうの ",
+    "highlight": "まえ",
+    "suffix": " に、コーヒーを のみます。",
+    "answer": "前",
+    "options": ["前", "間", "毎", "後"]
+  },
+  {
+    "id": 28,
+    "prefix": "えきまで 10ぷん ",
+    "highlight": "あるきます",
+    "suffix": "。",
+    "answer": "歩きます",
+    "options": ["歩きます", "走ります", "止まります", "乗ります"]
+  },
+  {
+    "id": 29,
+    "prefix": "わたしの ",
+    "highlight": "うち",
+    "suffix": " は ここから とおいです。",
+    "answer": "家",
+    "options": ["家", "屋", "家族", "室"]
+  },
+  {
+    "id": 30,
+    "prefix": "あの ながい ",
+    "highlight": "みち",
+    "suffix": " を まっすぐ いってください。",
+    "answer": "道",
+    "options": ["道", "通", "道路", "走"]
+  }
+]

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BOSS EXAM</title>
+    <title>Kuis</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
@@ -84,6 +84,15 @@
     </div>
 
     <script>
+        // --- 🔊 SETUP AUDIO ---
+        const sfxSlash = new Audio('/slash');
+        const sfxCrack = new Audio('/crack');
+        const sfxWin = new Audio('/victory'); // Pastikan file victory.mp3 ada
+        
+        sfxSlash.volume = 0.6;
+        sfxCrack.volume = 0.8;
+        sfxWin.volume = 1.0;
+
         let kanjiData = [];
         let quizQuestions = [];
         let currentQuizIndex = 0;
@@ -126,9 +135,8 @@
             quizQuestions = examData.map(item => {
                 const others = kanjiData.filter(k => k.id !== item.id);
                 const distractors = others.sort(() => 0.5 - Math.random()).slice(0, 3);
-                while(distractors.length < 3 && others.length > 0) distractors.push(others[0]); // Fallback
+                while(distractors.length < 3 && others.length > 0) distractors.push(others[0]); 
 
-                // Acak Tipe Soal (0: Arti, 1: Kanji, 2: Bacaan, 3: Kanji dr Bacaan)
                 const questionType = Math.floor(Math.random() * 4); 
                 
                 let questionObj = {
@@ -138,19 +146,16 @@
                     options: []
                 };
 
-                // CONFIG SOAL BERDASARKAN TIPE
                 if (questionType === 0) {
-                    // Tipe: Lihat Kanji -> Tebak Arti
                     questionObj.label = "APA ARTINYA?";
                     questionObj.question = item.kanji;
-                    questionObj.isKanjiQuestion = true; // Flag untuk font size
+                    questionObj.isKanjiQuestion = true;
                     questionObj.options = [
                         { text: item.meaning, isCorrect: true },
                         ...distractors.map(d => ({ text: d.meaning, isCorrect: false }))
                     ];
                 } 
                 else if (questionType === 1) {
-                    // Tipe: Lihat Arti -> Tebak Kanji
                     questionObj.label = "KANJI DARI";
                     questionObj.question = item.meaning;
                     questionObj.isKanjiQuestion = false;
@@ -160,7 +165,6 @@
                     ];
                 }
                 else if (questionType === 2) {
-                    // Tipe: Lihat Kanji -> Tebak Bacaan
                     questionObj.label = "CARA BACA KANJI BERIKUT";
                     questionObj.question = item.kanji;
                     questionObj.isKanjiQuestion = true;
@@ -170,9 +174,8 @@
                     ];
                 }
                 else {
-                    // Tipe: Lihat Bacaan -> Tebak Kanji
                     questionObj.label = "KANJI DARI";
-                    questionObj.question = `${item.onyomi} / ${item.kunyomi}`;
+                    questionObj.question = `${item.onyomi} ・ ${item.kunyomi}`;
                     questionObj.isKanjiQuestion = false;
                     questionObj.options = [
                         { text: item.kanji, isCorrect: true, isKanji: true },
@@ -180,7 +183,6 @@
                     ];
                 }
 
-                // Acak posisi jawaban
                 questionObj.options.sort(() => 0.5 - Math.random());
                 return questionObj;
             });
@@ -198,33 +200,27 @@
             const q = quizQuestions[currentQuizIndex];
             const questionEl = document.getElementById('quiz-question');
             
-            // 1. Update Texts
             document.getElementById('question-label').innerText = q.label;
             questionEl.innerText = q.question;
             document.getElementById('counter').innerText = `Soal ${currentQuizIndex + 1} / ${quizQuestions.length}`;
             
-            // 2. Dynamic Font Size (Agar Text Panjang muat di Mobile)
             if (q.isKanjiQuestion) {
-                questionEl.className = "text-7xl font-black text-white drop-shadow-lg leading-tight"; // Besar untuk Kanji
+                questionEl.className = "text-7xl font-black text-white drop-shadow-lg leading-tight"; 
             } else {
-                // Cek panjang teks soal
                 const len = q.question.length;
                 if(len > 20) questionEl.className = "text-2xl font-bold text-white leading-snug px-2";
                 else if(len > 10) questionEl.className = "text-3xl font-black text-white leading-snug";
                 else questionEl.className = "text-4xl font-black text-white leading-tight";
             }
 
-            // 3. Progress Bar
             const pct = (currentQuizIndex / quizQuestions.length) * 100;
             document.getElementById('quiz-progress').style.width = `${pct}%`;
 
-            // 4. Render Options
             const optsDiv = document.getElementById('quiz-options');
             optsDiv.innerHTML = ''; 
 
             q.options.forEach(opt => {
                 const btn = document.createElement('button');
-                // Styling berbeda jika opsi adalah Kanji (lebih besar)
                 const fontSize = opt.isKanji ? "text-3xl" : "text-sm font-bold";
                 
                 btn.className = `option-btn w-full py-4 px-4 rounded-xl shadow-md flex items-center justify-center min-h-[64px] ${fontSize}`;
@@ -243,11 +239,15 @@
                 quizScore += 10;
                 btnElement.classList.add('btn-correct');
                 triggerSlash();
+                
+                // 🔊 AUDIO BENAR
+                sfxSlash.currentTime = 0;
+                sfxSlash.play().catch(()=>{});
+
             } else {
                 btnElement.classList.add('btn-wrong');
                 
-                // Cari jawaban benar untuk Feedback
-                // Kita cari berdasarkan teks opsi yang benar di data soal saat ini
+                // Cari jawaban benar
                 const q = quizQuestions[currentQuizIndex];
                 const correctOption = q.options.find(o => o.isCorrect);
                 
@@ -256,6 +256,10 @@
                 });
 
                 triggerDamage();
+
+                // 🔊 AUDIO SALAH
+                sfxCrack.currentTime = 0;
+                sfxCrack.play().catch(()=>{});
             }
 
             const scoreEl = document.getElementById('scoreDisplay');
@@ -265,7 +269,7 @@
             setTimeout(() => {
                 currentQuizIndex++;
                 renderQuestion();
-            }, 1200); // Delay sedikit lebih lama agar user bisa lihat jawaban benar
+            }, 1200); 
         }
 
         // --- VFX ---
@@ -309,6 +313,10 @@
 
             setTimeout(() => {
                 if (quizScore >= passingScore) {
+                    // --- MENANG ---
+                    // 🔊 AUDIO VICTORY
+                    sfxWin.play().catch(()=>{});
+
                     if(quizScore === 100) player.xp += 50;
                     
                     const count = player.learnedKanji.length;
@@ -318,22 +326,28 @@
                     else if (count >= 10) player.currentRank = "Rookie";
                     else player.currentRank = "Apprentice";
 
-                    showModal("Victory! 🎉", `Skor: ${quizScore}. Yourr Rank: ${player.currentRank}!`, "👑", () => {
+                    showModal("Victory! 🎉", `Skor: ${quizScore}. Your Rank: ${player.currentRank}!`, "👑", () => {
                         localStorage.setItem('rpgKanjiPlayer', JSON.stringify(player));
                         window.location.href = '/';
                     });
                 } else {
+                    // --- KALAH ---
+                    // 🔊 AUDIO DEFEAT (Pake Crack aja)
+                    sfxCrack.currentTime = 0;
+                    sfxCrack.play().catch(()=>{});
+
                     const penalty = 50;
                     player.xp = Math.max(0, player.xp - penalty);
                     const kanjiToRemove = 10; 
                     if (player.learnedKanji.length >= kanjiToRemove) {
                         player.learnedKanji.splice(-kanjiToRemove); 
                     } else {
-                        player.learnedKanji = []; // Reset total jika data < 10
+                        player.learnedKanji = []; 
                     }
                     const count = player.learnedKanji.length;
                     if (count < 10) player.currentRank = "Apprentice";
                     else if (count < 30) player.currentRank = "Rookie";
+                    
                     showModal("Defeat 💀", `Skor kamu : ${quizScore} XP Kamu  -${penalty}.`, "", () => {
                         localStorage.setItem('rpgKanjiPlayer', JSON.stringify(player));
                         window.location.href = '/';
@@ -341,7 +355,6 @@
                 }
             }, 500);
         }
-    
     </script>
 </body>
 </html>

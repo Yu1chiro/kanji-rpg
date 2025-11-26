@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kanji RPG Quest</title>
+    <title>Kanji Quest</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
@@ -27,10 +27,468 @@
             overflow: hidden;
         }
     </style>
+    <style>
+    /* Fog Container */
+    .fog-container {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        z-index: 1;
+    }
+    
+    /* Mystic Fog Base */
+    .mystic-fog {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(50px);
+        mix-blend-mode: screen;
+    }
+    
+    /* Bottom Layer - Dense Fog */
+    .fog-bottom-1 {
+        width: 600px;
+        height: 300px;
+        bottom: -10%;
+        left: -10%;
+        background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(200, 180, 255, 0.15) 40%,
+            transparent 70%
+        );
+        animation: fogDriftBottom1 15s ease-in-out infinite;
+    }
+    
+    .fog-bottom-2 {
+        width: 700px;
+        height: 350px;
+        bottom: -15%;
+        right: -15%;
+        background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(180, 160, 255, 0.12) 40%,
+            transparent 70%
+        );
+        animation: fogDriftBottom2 18s ease-in-out infinite;
+        animation-delay: -5s;
+    }
+    
+    .fog-bottom-3 {
+        width: 550px;
+        height: 280px;
+        bottom: 5%;
+        left: 30%;
+        background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(220, 200, 255, 0.1) 40%,
+            transparent 70%
+        );
+        animation: fogDriftBottom3 20s ease-in-out infinite;
+        animation-delay: -10s;
+    }
+    
+    /* Mid Layer - Flowing Fog */
+    .fog-mid-1 {
+        width: 500px;
+        height: 250px;
+        top: 30%;
+        left: -20%;
+        background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(168, 85, 247, 0.1) 30%,
+            transparent 60%
+        );
+        animation: fogDriftMid1 22s ease-in-out infinite;
+    }
+    
+    .fog-mid-2 {
+        width: 480px;
+        height: 240px;
+        top: 40%;
+        right: -15%;
+        background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.12) 0%,
+            rgba(147, 51, 234, 0.08) 30%,
+            transparent 60%
+        );
+        animation: fogDriftMid2 25s ease-in-out infinite;
+        animation-delay: -8s;
+    }
+    
+    .fog-mid-3 {
+        width: 520px;
+        height: 260px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(192, 132, 252, 0.06) 30%,
+            transparent 60%
+        );
+        animation: fogPulse 20s ease-in-out infinite;
+    }
+    
+    /* Top Layer - Light Wisps */
+    .fog-top-1 {
+        width: 350px;
+        height: 180px;
+        top: 10%;
+        left: 10%;
+        background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(216, 180, 254, 0.1) 30%,
+            transparent 50%
+        );
+        animation: fogDriftTop1 18s ease-in-out infinite;
+        animation-delay: -3s;
+    }
+    
+    .fog-top-2 {
+        width: 400px;
+        height: 200px;
+        top: 15%;
+        right: 15%;
+        background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(233, 213, 255, 0.09) 30%,
+            transparent 50%
+        );
+        animation: fogDriftTop2 16s ease-in-out infinite;
+        animation-delay: -7s;
+    }
+    
+    /* Fog Animations */
+    @keyframes fogDriftBottom1 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(80px, -30px); }
+    }
+    
+    @keyframes fogDriftBottom2 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-100px, -40px); }
+    }
+    
+    @keyframes fogDriftBottom3 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-60px, 20px); }
+    }
+    
+    @keyframes fogDriftMid1 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(150px, 40px) scale(1.1); }
+    }
+    
+    @keyframes fogDriftMid2 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(-120px, -30px) scale(1.15); }
+    }
+    
+    @keyframes fogPulse {
+        0%, 100% { 
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.6;
+        }
+        50% { 
+            transform: translate(-50%, -50%) scale(1.3);
+            opacity: 0.3;
+        }
+    }
+    
+    @keyframes fogDriftTop1 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(100px, 50px); }
+    }
+    
+    @keyframes fogDriftTop2 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-80px, 60px); }
+    }
+    
+    /* Glowing Particles */
+    .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+        filter: blur(1px);
+    }
+    
+    .particle-1 {
+        top: 20%;
+        left: 15%;
+        animation: particleFloat1 8s ease-in-out infinite;
+    }
+    
+    .particle-2 {
+        top: 60%;
+        right: 20%;
+        animation: particleFloat2 10s ease-in-out infinite;
+        animation-delay: -2s;
+    }
+    
+    .particle-3 {
+        bottom: 30%;
+        left: 25%;
+        animation: particleFloat3 12s ease-in-out infinite;
+        animation-delay: -4s;
+    }
+    
+    .particle-4 {
+        top: 40%;
+        right: 30%;
+        animation: particleFloat1 9s ease-in-out infinite;
+        animation-delay: -6s;
+    }
+    
+    .particle-5 {
+        bottom: 20%;
+        right: 15%;
+        animation: particleFloat2 11s ease-in-out infinite;
+        animation-delay: -3s;
+    }
+    
+    @keyframes particleFloat1 {
+        0%, 100% { 
+            transform: translate(0, 0);
+            opacity: 0;
+        }
+        10%, 90% {
+            opacity: 1;
+        }
+        50% { 
+            transform: translate(30px, -80px);
+        }
+    }
+    
+    @keyframes particleFloat2 {
+        0%, 100% { 
+            transform: translate(0, 0);
+            opacity: 0;
+        }
+        10%, 90% {
+            opacity: 1;
+        }
+        50% { 
+            transform: translate(-40px, -100px);
+        }
+    }
+    
+    @keyframes particleFloat3 {
+        0%, 100% { 
+            transform: translate(0, 0);
+            opacity: 0;
+        }
+        10%, 90% {
+            opacity: 1;
+        }
+        50% { 
+            transform: translate(50px, -120px);
+        }
+    }
+    
+    /* Portal Ring Effect */
+    .portal-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 2px solid rgba(168, 85, 247, 0.3);
+        border-radius: 50%;
+        z-index: 0;
+    }
+    
+    .ring-1 {
+        width: 300px;
+        height: 300px;
+        animation: portalExpand 3s ease-out infinite;
+    }
+    
+    .ring-2 {
+        width: 300px;
+        height: 300px;
+        animation: portalExpand 3s ease-out infinite;
+        animation-delay: 1s;
+    }
+    
+    .ring-3 {
+        width: 300px;
+        height: 300px;
+        animation: portalExpand 3s ease-out infinite;
+        animation-delay: 2s;
+    }
+    
+    @keyframes portalExpand {
+        0% {
+            width: 300px;
+            height: 300px;
+            opacity: 0.6;
+        }
+        100% {
+            width: 600px;
+            height: 600px;
+            opacity: 0;
+        }
+    }
+    
+    /* Loading Bar */
+    .loading-bar {
+        width: 0%;
+        animation: loadProgress 2.5s ease-in-out forwards, shimmer 1.5s infinite linear;
+        background-size: 200% 100%;
+        box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+    }
+    
+    @keyframes loadProgress {
+        0% { width: 0%; }
+        100% { width: 100%; }
+    }
+    
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+    
+    /* Text Effects */
+    .text-glow {
+        text-shadow: 0 0 20px rgba(168, 85, 247, 0.8),
+                     0 0 40px rgba(168, 85, 247, 0.4);
+    }
+    
+    .portal-glow {
+        filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.6));
+    }
+    
+    /* Fade Animations */
+    .animate-fade-in {
+        animation: fadeIn 1.5s ease-out;
+    }
+    
+    .animate-fade-in-delay {
+        animation: fadeIn 1.5s ease-out 0.5s both;
+    }
+    
+    .animate-bounce-slow {
+        animation: bounceSlow 3s infinite;
+    }
+    
+    .animate-pulse-slow {
+        animation: pulseSlow 2s infinite;
+    }
+    
+    @keyframes fadeIn {
+        from { 
+            opacity: 0; 
+            transform: translateY(-30px) scale(0.9);
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0) scale(1);
+        }
+    }
+    
+    @keyframes bounceSlow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+    
+    @keyframes pulseSlow {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+    }
+    
+    /* Fade Out Splash */
+    .splash-fade-out {
+        animation: splashFadeOut 1s ease-out forwards;
+    }
+    
+    @keyframes splashFadeOut {
+        to { 
+            opacity: 0; 
+            transform: scale(1.2);
+            filter: blur(10px);
+        }
+    }
+</style>
 </head>
 
 <body class="bg-slate-900 text-white font-sans overflow-x-hidden min-h-screen pb-10 transition-colors duration-100">
-
+<!-- Splash Screen -->
+<div id="splashScreen" class="fixed inset-0 z-[100] bg-gradient-to-b from-slate-950 via-purple-950 to-slate-950 flex flex-col items-center justify-center overflow-hidden">
+    <!-- Mystic Fog Layers -->
+    <div class="fog-container">
+        <!-- Bottom Layer - Dense Fog -->
+        <div class="mystic-fog fog-bottom-1"></div>
+        <div class="mystic-fog fog-bottom-2"></div>
+        <div class="mystic-fog fog-bottom-3"></div>
+        
+        <!-- Mid Layer - Flowing Fog -->
+        <div class="mystic-fog fog-mid-1"></div>
+        <div class="mystic-fog fog-mid-2"></div>
+        <div class="mystic-fog fog-mid-3"></div>
+        
+        <!-- Top Layer - Light Wisps -->
+        <div class="mystic-fog fog-top-1"></div>
+        <div class="mystic-fog fog-top-2"></div>
+        
+        <!-- Glowing Particles -->
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+        <div class="particle particle-5"></div>
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10 text-center px-4">
+        <div class="mb-3 portal-glow">
+            <span class="text-[10rem] animate-bounce-slow">🌎</span>
+        </div>
+        <h1 class="text-2xl font-black mb-2 text-white animate-fade-in text-glow">
+            Welcome to world
+        </h1>
+        <p class="text-purple-300 text-sm font-bold mb-8 animate-fade-in-delay">
+            ⚔️ Dungeon is waiting you ⚔️
+        </p>
+        
+        <!-- Loading Bar -->
+        <div class="w-64 h-2 bg-slate-900/50 rounded-full overflow-hidden border border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
+            <div class="loading-bar h-full bg-gradient-to-r from-purple-500 via-pink-400 to-purple-500"></div>
+        </div>
+        <p class="text-purple-400 text-xs mt-3 animate-pulse-slow">Loading......</p>
+    </div>
+    
+    <!-- Portal Ring Effect -->
+    <div class="portal-ring ring-1"></div>
+    <div class="portal-ring ring-2"></div>
+    <div class="portal-ring ring-3"></div>
+</div>
+<script>
+    // Splash Screen Logic
+    (function() {
+        const splashScreen = document.getElementById('splashScreen');
+        const hasSeenSplash = localStorage.getItem('hasSeenSplash');
+        
+        // Jika sudah pernah lihat splash, langsung hide
+        if (hasSeenSplash === 'true') {
+            splashScreen.style.display = 'none';
+            return;
+        }
+        
+        // Tampilkan splash screen selama 3.5 detik
+        setTimeout(() => {
+            splashScreen.classList.add('splash-fade-out');
+            
+            // Hapus dari DOM setelah animasi selesai
+            setTimeout(() => {
+                splashScreen.remove();
+                // Tandai sudah pernah lihat splash
+                localStorage.setItem('hasSeenSplash', 'true');
+            }, 1000);
+        }, 3500);
+    })();
+</script>
     <div id="vfx-layer" class="fixed inset-0 z-[60] flex items-center justify-center">
         <svg id="sword-slash" class="absolute w-full h-full opacity-0" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M-10,110 L110,-10" stroke="white" stroke-width="2" fill="none"
@@ -67,7 +525,7 @@
         <div class="flex items-center gap-2">
             <span class="text-xl">🏯</span>
             <h1 class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500 text-base">
-                KANJI RPG</h1>
+                KANJI QUEST</h1>
         </div>
         <div class="flex gap-3 text-xs font-mono">
             <div class="flex flex-col items-end">
@@ -81,32 +539,55 @@
         </div>
     </nav>
 
-    <section id="screen-home"
-        class="pt-20 px-4 flex flex-col items-center justify-center min-h-screen text-center relative overflow-hidden">
-        <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-purple-600/20 blur-[80px] rounded-full -z-10">
-        </div>
+  <section id="screen-home"
+    class="pt-20 px-4 flex flex-col items-center justify-center min-h-screen text-center relative overflow-hidden">
+    
+    <!-- Ambient Glow Effects -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/30 blur-[120px] rounded-full -z-10 animate-pulse"></div>
+    <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-pink-500/20 blur-[100px] rounded-full -z-10"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-blue-500/20 blur-[100px] rounded-full -z-10"></div>
 
-        <h1 id="homeTitle" class="text-4xl md:text-6xl font-black mb-3 drop-shadow-lg tracking-tight">
-            <span class="block text-white">KANJI</span>
-            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">QUEST</span>
+    <!-- Title Section -->
+    <div class="mb-12 space-y-2">
+        <h1 id="homeTitle" class="text-5xl md:text-7xl font-black drop-shadow-2xl tracking-tighter">
+            <span class="block text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]">KANJI</span>
+            <span class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 drop-shadow-[0_0_30px_rgba(168,85,247,0.5)]">QUEST</span>
         </h1>
+        <p class="text-purple-300/80 text-sm tracking-widest font-semibold">⚔️ DUNGEON ADVENTURE ⚔️</p>
+    </div>
 
-        <div id="homeButtons" class="flex flex-col gap-3 w-full max-w-[280px] mt-8">
-            <button onclick="startGame()"
-                class="w-full bg-yellow-500 text-slate-900 font-bold py-3 rounded-xl shadow-[0_0_15px_rgba(234,179,8,0.3)] active:scale-95 transition-transform flex items-center justify-center gap-2 text-sm">
-                <span>⚔️</span> MULAI PETUALANGAN
-            </button>
-            <a href="/stats"
-                class="w-full bg-slate-800 text-slate-300 font-bold py-3 rounded-xl border border-slate-700 active:scale-95 transition-transform text-center text-sm">
-                📊 STATISTIK
-            </a>
-        </div>
-    </section>
+    <!-- Action Buttons -->
+    <div id="homeButtons" class="flex flex-col gap-4 w-full max-w-[300px] mt-4">
+        <button onclick="startGame()"
+            class="group relative w-full bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 text-slate-900 font-black py-4 rounded-2xl shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] active:scale-95 transition-all duration-300 flex items-center justify-center gap-3 text-base overflow-hidden">
+            <!-- Shine Effect -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+            <span class="text-xl group-hover:scale-110 transition-transform duration-300">⚔️</span> 
+            <span class="relative">EXPLORE DUNGEON</span>
+        </button>
+        
+        <a href="/stats"
+            class="group relative w-full bg-slate-800/80 backdrop-blur-sm text-slate-200 font-bold py-4 rounded-2xl border-2 border-slate-700/50 hover:border-purple-500/50 hover:bg-slate-800 active:scale-95 transition-all duration-300 text-center text-base shadow-lg hover:shadow-purple-500/20 overflow-hidden">
+            <!-- Hover Gradient -->
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/10 to-purple-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <span class="relative flex items-center justify-center gap-2">
+                <span class="text-lg">📊</span>
+                <span>PROFILE</span>
+            </span>
+        </a>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2 opacity-30">
+        <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+        <div class="w-2 h-2 bg-pink-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+        <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+    </div>
+</section>
 
     <section id="screen-map" class="hidden pt-24 pb-10 px-4 max-w-3xl mx-auto">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-white border-l-4 border-purple-500 pl-3">Roadmap</h2>
+            <h2 class="text-xl font-bold text-white border-l-4 border-purple-500 pl-3">Map 🌎</h2>
             <button onclick="showScreen('screen-home')"
                 class="text-slate-500 hover:text-white text-xs underline">Kembali</button>
         </div>
@@ -174,49 +655,69 @@
             </button>
         </div>
     </section>
+    <div id="briefingModal"
+        class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-md flex items-center justify-center px-4">
+        <div class="bg-slate-900 border-2 border-slate-700 rounded-2xl w-full max-w-md p-6 relative shadow-2xl">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-black text-white uppercase tracking-widest border-b border-slate-800 pb-2">
+                    ⚔️ PREPARATION ⚔️
+                </h2>
+                <p class="text-xs text-slate-400 mt-2">Item Kanji ini adalah senjatamu di Dungeon ini.</p>
+            </div>
 
+            <div id="briefingGrid" class="grid grid-cols-5 gap-2 mb-8">
+            </div>
+
+            <button onclick="startRealBattle()"
+                class="w-full bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white font-bold py-4 rounded-xl shadow-[0_0_20px_rgba(234,179,8,0.4)] transition-all active:scale-95 group">
+                <span class="group-hover:animate-pulse">MASUK DUNGEON ➔</span>
+            </button>
+            <button onclick="closeBriefing()" class="absolute top-4 right-4 text-slate-600 hover:text-white">✕</button>
+        </div>
+    </div>
     <script>
+        const sfxSlash = new Audio('/slash'); // Pastikan file ada di folder public
+        const sfxCrack = new Audio('/crack'); // Pastikan file ada di folder public
+        
+        // Opsional: Atur volume agar tidak terlalu kaget
+        sfxSlash.volume = 0.6;
+        sfxCrack.volume = 0.8;
         let kanjiData = [], currentRealmData = [], currentCardIndex = 0, isFlipped = false, onModalClose = null;
         const defaultPlayer = { learnedKanji: [], xp: 0, currentRank: "Apprentice", streak: 0, realmsCompleted: [] };
         let player = JSON.parse(localStorage.getItem('rpgKanjiPlayer')) || defaultPlayer;
 
-        window.onload = () => {
+        window.onload = async () => { // Ubah jadi async
             runEntranceAnimations();
             updateUIStats();
-            fetchKanjiData();
-        };
+            await fetchKanjiData(); // Tunggu data dulu
 
+            // === LOGIC BARU: AUTO START BATTLE (DARI HALAMAN PREPARATION) ===
+            // Cek URL Params
+            const urlParams = new URLSearchParams(window.location.search);
+            const startBattle = urlParams.get('start_battle');
+            const targetRealm = parseInt(urlParams.get('realm_id'));
+
+            if (startBattle === 'true' && targetRealm) {
+                // Bersihkan URL agar kalau di-refresh tidak battle terus
+                window.history.replaceState({}, document.title, "/");
+                
+                // Langsung masuk mode battle
+                enterRealm(targetRealm);
+            }
+        };
         function runEntranceAnimations() {
             gsap.from("#homeTitle", { y: -30, opacity: 0, duration: 1, ease: "power2.out" });
             gsap.from("#homeButtons > *", { y: 30, opacity: 0, duration: 0.6, delay: 0.4, stagger: 0.1, clearProps: "all" });
         }
 
-        async function fetchKanjiData() {
+       async function fetchKanjiData() {
             try {
-                // 1. Ambil Data Kanji Biasa
                 const response = await fetch('/api/kanji');
                 const result = await response.json();
 
                 if (result.success) {
                     kanjiData = result.data;
-
-                    // 2. LOGIC BARU: Cek apakah Player pantas melawan Boss?
-                    // Syarat: Sudah God Tier atau hafal >= 90 kanji (sesuai logic rank kamu)
-                    if (player.currentRank === "God Tier" || player.learnedKanji.length >= 90) {
-                        try {
-                            const bossResponse = await fetch('/api/boss-kanji');
-                            const bossResult = await bossResponse.json();
-                            if (bossResult.success) {
-                                // Gabungkan data Boss ke array utama
-                                kanjiData = [...kanjiData, ...bossResult.data];
-                            }
-                        } catch (bossErr) {
-                            console.error("Gagal memanggil Boss:", bossErr);
-                        }
-                    }
-
-                    // Render ulang map setelah data lengkap (termasuk boss jika ada)
-                    renderMap();
+                    renderMap(); // Langsung render peta
                 }
             } catch (error) {
                 console.error(error);
@@ -238,78 +739,113 @@
         }
 
         // --- MAP LOGIC ---
-      function renderMap() {
+       function renderMap() {
             const grid = document.getElementById('realmGrid');
             grid.innerHTML = '';
 
-            // 1. Daftar Realm Awal (1-10)
+            // Daftar Realm 1-10
             const realms = ["Hari & Tanggal", "Bulan & Musim", "Keluarga", "Aktivitas", "Tempat", "Arah", "Alam", "Sekolah", "Transportasi", "Makanan"];
+            
+            // SELALU TAMBAHKAN BOSS KE MAP (Agar user tahu goal akhirnya)
+            realms.push("☠️ FINAL BOSS ☠️");
 
-            // 2. LOGIC BOSS: Cek jika data boss sudah ter-load (ada realm 11)
-            const hasBossData = kanjiData.some(k => k.realm === 11);
-            if (hasBossData) {
-                realms.push("☠️ FINAL BOSS ☠️");
-            }
-
-            let isUnlocked = true;
+            let isUnlocked = true; // Realm 1 selalu terbuka
 
             realms.forEach((name, index) => {
                 const realmId = index + 1;
+                const isBossRealm = realmId === 11;
+                
+                // --- 🛡️ SECURITY CHECK BOSS ---
+                // Jika ini Boss, abaikan urutan realm 1-10, cek langsung Rank Player
+                if (isBossRealm) {
+                    isUnlocked = (player.currentRank === "God Tier");
+                }
+
+                // Filter Data (Hanya untuk Realm 1-10, Boss tidak pakai data ini di map)
                 const realmKanji = kanjiData.filter(k => k.realm === realmId);
                 const total = realmKanji.length > 0 ? realmKanji.length : 10;
                 const mastered = realmKanji.filter(k => player.learnedKanji.includes(k.id)).length;
-                const isComplete = realmKanji.length > 0 && mastered >= total;
-                const isBossRealm = realmId === 11; // Penanda Boss
+                const isComplete = !isBossRealm && realmKanji.length > 0 && mastered >= total;
 
                 const card = document.createElement('div');
 
-                // --- LOGIC TAMPILAN KARTU (Locked vs Empty vs Active) ---
+                // --- RENDER TAMPILAN KARTU ---
                 
                 if (!isUnlocked) {
-                    // KONDISI 1: REALM TERKUNCI
-                    card.className = `relative bg-slate-900/60 p-4 rounded-xl border border-slate-800 flex items-center gap-4 opacity-60 grayscale`;
-                    card.innerHTML = `<div class="text-2xl">🔒</div><div><h3 class="text-sm font-bold text-slate-500">Realm ${realmId}</h3><p class="text-[10px] text-slate-600">Terkunci</p></div>`;
-                
-                } else if (realmKanji.length === 0) {
-                    // KONDISI 2: REALM KOSONG / ERROR / KABUT
+                    // 🔒 KONDISI: TERKUNCI (Rank Belum Cukup / Realm Sebelumnya Belum Selesai)
+                    const lockMsg = isBossRealm ? "Butuh Rank: GOD TIER" : "Terkunci";
+                    
+                    card.className = `relative bg-slate-900/60 p-4 rounded-xl border border-slate-800 flex items-center gap-4 opacity-60 grayscale cursor-not-allowed`;
+                    card.innerHTML = `
+                        <div class="text-2xl">🔒</div>
+                        <div>
+                            <h3 class="text-sm font-bold text-slate-500">${isBossRealm ? 'FINAL BOSS' : 'Realm ' + realmId}</h3>
+                            <p class="text-[10px] text-slate-600">${lockMsg}</p>
+                        </div>`;
+                    
+                    // Opsional: Klik card boss terkunci memberi info
+                    if(isBossRealm) {
+                        card.onclick = () => showModal("AKSES DITOLAK", "Kekuatanmu belum cukup! Capai Rank 'God Tier' untuk menantang Raja Iblis.", "⛔");
+                    }
+
+                } else if (!isBossRealm && realmKanji.length === 0) {
+                    // 🚧 KONDISI: DATA KOSONG (Hanya Realm Biasa)
                     card.className = `relative bg-slate-800/50 p-4 rounded-xl border border-dashed border-slate-700`;
-                    card.innerHTML = `<div class="flex items-center gap-3 opacity-50"><span class="text-xl">🚧</span><div><h3 class="text-sm font-bold text-slate-500">Realm ${realmId}</h3><p class="text-[10px]">Kabut Tebal...</p></div></div>`;
+                    card.innerHTML = `<div class="flex items-center gap-3 opacity-50"><span class="text-xl">🚧</span><div><h3 class="text-sm font-bold text-slate-500">Realm ${realmId}</h3><p class="text-[10px]">Data Kosong...</p></div></div>`;
                 
                 } else {
-                    // KONDISI 3: REALM TERBUKA (NORMAL & BOSS)
+                    // 🔓 KONDISI: TERBUKA (BISA MASUK)
                     
-                    // Tentukan Style Border (Boss vs Normal)
+                    // Style khusus Boss (Merah Berdenyut) vs Realm Biasa
                     const borderStyle = isBossRealm 
-                        ? 'border-red-600 shadow-[0_0_15px_rgba(220,38,38,0.5)]' 
+                        ? 'border-red-600 shadow-[0_0_15px_rgba(220,38,38,0.5)] animate-pulse' 
                         : (isComplete ? 'border-yellow-500/50' : 'border-slate-700 hover:border-purple-500');
 
                     card.className = `relative bg-slate-800 p-4 rounded-xl border ${borderStyle} transition-all cursor-pointer active:scale-95`;
-                    card.onclick = () => enterRealm(realmId);
 
-                    // Tentukan Variabel Tampilan (Warna, Icon, Label)
-                    const titleColor = isComplete ? 'text-yellow-400' : (isBossRealm ? 'text-red-500 animate-pulse' : 'text-purple-400');
-                    const icon = isComplete ? '👑' : (isBossRealm ? '👹' : '🏰');
-                    const label = isBossRealm ? 'DANGER ZONE' : 'REALM ' + realmId;
-                    const barColor = isComplete ? 'from-yellow-500 to-orange-500' : (isBossRealm ? 'from-red-600 to-rose-900' : 'from-purple-600 to-blue-500');
+                    // === 🚀 LOGIC REDIRECT ===
+                    card.onclick = () => {
+                        if (isBossRealm) {
+                            // REDIRECT KE HALAMAN BOSS
+                            window.location.href = '/boss-battle'; 
+                        } else {
+                            // REDIRECT KE PREPARATION (Realm Biasa)
+                            window.location.href = `/preparation?realm=${realmId}`; 
+                        }
+                    };
+
+                    // Layout Isi Kartu
+                    const labelColor = isBossRealm ? 'text-red-500 font-black tracking-widest' : (isComplete ? 'text-yellow-400' : 'text-purple-400');
+                    const icon = isBossRealm ? '👹' : (isComplete ? '👑' : '🏰');
+                    const subLabel = isBossRealm ? 'DANGER ZONE' : `REALM ${realmId}`;
+                    
+                    // Boss tidak butuh progress bar di peta
+                    const progressHTML = isBossRealm 
+                        ? `<p class="text-[10px] text-red-400 mt-2 font-bold uppercase text-right">KILL HIM!</p>`
+                        : `<div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
+                               <div class="bg-gradient-to-r ${isComplete ? 'from-yellow-500 to-orange-500' : 'from-purple-600 to-blue-500'} h-full" style="width: ${(mastered / total) * 100}%"></div>
+                           </div>
+                           <p class="text-right text-[10px] text-slate-400 mt-1 font-mono">${mastered}/${total}</p>`;
 
                     card.innerHTML = `
                         <div class="flex justify-between items-center mb-2">
-                            <span class="text-xs font-bold ${titleColor}">${label}</span>
+                            <span class="text-xs font-bold ${labelColor}">${subLabel}</span>
                             <span class="text-xl">${icon}</span>
                         </div>
                         <h3 class="text-base font-bold text-white mb-3">${name}</h3>
-                        <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-gradient-to-r ${barColor} h-full" style="width: ${(mastered/total)*100}%"></div>
-                        </div>
-                        <p class="text-right text-[10px] text-slate-400 mt-1 font-mono">${mastered}/${total}</p>`;
+                        ${progressHTML}
+                    `;
                 }
 
                 grid.appendChild(card);
                 
-                // Logic: Jika realm ini belum selesai, realm berikutnya dikunci
-                if (!isComplete) isUnlocked = false;
+                // Chain Rule: Realm berikutnya terbuka jika realm ini selesai (Kecuali Boss, dia punya aturan sendiri)
+                if (!isComplete && !isBossRealm) isUnlocked = false;
             });
         }
+        let pendingRealmId = null;
+
+       
         function enterRealm(realmId) {
             currentRealmData = kanjiData.filter(k => k.realm === realmId && !player.learnedKanji.includes(k.id));
             if (currentRealmData.length === 0) { showModal("Realm Selesai", "Semua monster dikalahkan!", "🏆"); return; }
@@ -325,7 +861,7 @@
             isFlipped = false;
             document.getElementById('flashcard').style.transform = "rotateY(0deg)";
             document.getElementById('cardKanji').innerText = data.kanji;
-            document.getElementById('cardYomi').innerText = `${data.onyomi} / ${data.kunyomi}`;
+            document.getElementById('cardYomi').innerText = `${data.onyomi} ・ ${data.kunyomi}`;
             document.getElementById('cardMeaning').innerText = data.meaning;
             document.getElementById('cardExample').innerHTML = data.example.replace(/,/g, '<br/>');
 
@@ -342,18 +878,21 @@
 
         // --- ⚔️ LOGIC SERANG (HAFAL) & REDIRECT QUIZ ---
         function markMastered() {
+           sfxSlash.currentTime = 0; // Reset durasi agar bisa spam klik
+            sfxSlash.play().catch(e => console.log("Audio error:", e));
+
             const currentKanji = currentRealmData[currentCardIndex];
             const cardRect = document.getElementById('flashcard').getBoundingClientRect();
             const centerX = cardRect.left + cardRect.width / 2;
             const centerY = cardRect.top + cardRect.height / 2;
 
             // 1. Save Data
+            
             if (!player.learnedKanji.includes(currentKanji.id)) {
                 player.learnedKanji.push(currentKanji.id);
                 player.xp += 10;
                 saveData();
             }
-
             // 2. VFX (Slash & Particles)
             const slash = document.getElementById('sword-slash');
             gsap.fromTo(slash, { opacity: 1, scale: 0.5, rotation: -45 }, { opacity: 0, scale: 1.5, rotation: 0, duration: 0.4 });
@@ -383,9 +922,11 @@
         // --- 🧠 LOGIC LUPA (FORGOT) ---
         // --- 🧠 LOGIC LUPA (FORGOT) ---
         function handleForgot() {
+            sfxCrack.currentTime = 0;
+            sfxCrack.play().catch(e => console.log("Audio error:", e));
+
             const penalty = 10;
             player.xp = Math.max(0, player.xp - penalty);
-
             // === REVISI LOGIC: GAME OVER / DEMOTION JIKA XP 0 ===
             if (player.xp === 0) {
                 // 1. Hukuman: Hapus 5 Kanji terakhir (Mundur Level/Progress)
